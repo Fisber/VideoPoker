@@ -1,3 +1,4 @@
+using System;
 using Bets;
 using Cards;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Models
     /// logic : flush we check if we have 5 amount of the same suit in the Dictionary
     /// logic : Straight a bit tricky I consider Straight is A 2 3 4 5 . . . 10 J Q K A
     /// so we have to make 2 checks for condition where A = 1 and where is when A  > K
+    /// if A > K it is called BroadwayCombination
     /// </summary>
     public class StraightAndFlushCombination : ICheckCombination
     {
@@ -18,11 +20,14 @@ namespace Models
 
         private Dictionary<Suits, int> Suits = new Dictionary<Suits, int>();
 
-        // this is for check if we have BroadwayCombination when A > K
+        //BroadwayCombination when A > K
         private List<Types> BroadwayCombination = new List<Types>
         {
-            CardType.Ten, CardType.Jack, CardType.Queen, CardType.Jack, CardType.Ace
+            CardType.Ten, CardType.Jack, CardType.Queen, CardType.King, CardType.Ace
         };
+
+        private bool IsFlush;
+        private bool IsStraight;
 
         public CombinationEnum CheckCombination(List<Card> cards)
         {
@@ -44,23 +49,22 @@ namespace Models
             }
 
 
-            bool isFlush = Suits.Any(s => s.Value == 5);
-
             CombinationEnum combination = CombinationEnum.None;
 
-            bool isStraight = CheckStraight(Types);
+             IsStraight = CheckStraight();
+             IsFlush = CheckFlush();
 
-            if (isStraight)
+            if (IsStraight)
             {
                 combination = CombinationEnum.Straight;
             }
 
-            if (isStraight && isFlush)
+            if (IsStraight && IsFlush)
             {
                 combination = CombinationEnum.StraightFlush;
             }
 
-            if (isStraight == false && isFlush)
+            if (IsStraight == false && IsFlush)
             {
                 combination = CombinationEnum.Flush;
             }
@@ -68,19 +72,32 @@ namespace Models
             return combination;
         }
 
-        private bool CheckStraight(List<Types> combination)
+        private bool CheckFlush()
         {
-            if (combination.Count != combination.Distinct().Count())
+            // only one suit with five incremental <Clubs,5>
+            return Suits.Count == 1;
+        }
+
+        private bool CheckStraight()
+        {
+            if (Types.Count != Types.Distinct().Count())
             {
                 return false;
             }
 
-            if (combination.Except(BroadwayCombination).Any())
+            // check BroadwayCombination 
+            if (Types.Except(BroadwayCombination).Any() == false)
             {
                 return true;
             }
 
-            if (combination.Last() - combination.First() == 4)
+            //1-2-3-4-5 - > 5-1 , 4-2 , 4-1 == 2+1 == element in the middle <3>
+            bool condition = Math.Abs(Types[4] - Types[0]) == 4;
+            condition = condition && Math.Abs(Types[3] - Types[1]) == 2;
+            condition = condition && Math.Abs((int) Types[3] - 1)
+                == Math.Abs((int) Types[1] + 1);
+
+            if (condition)
             {
                 return true;
             }

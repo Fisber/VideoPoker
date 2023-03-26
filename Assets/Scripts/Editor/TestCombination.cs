@@ -193,19 +193,19 @@ public class TestCombination
     {
         
         Card1.SetSuits(Suits.Clubs);
-        Card1.SetCardType(Types.Jack);
+        Card1.SetCardType(Types.Five);
 
         Card2.SetSuits(Suits.Clubs);
-        Card2.SetCardType(Types.Ten);
+        Card2.SetCardType(Types.Six);
 
         Card3.SetSuits(Suits.Clubs);
-        Card3.SetCardType(Types.Nine);
+        Card3.SetCardType(Types.Seven);
 
         Card4.SetSuits(Suits.Clubs);
         Card4.SetCardType(Types.Eight);
 
         Card5.SetSuits(Suits.Clubs);
-        Card5.SetCardType(Types.Seven);
+        Card5.SetCardType(Types.Nine);
 
         List<Card> Combination = new List<Card>
         {

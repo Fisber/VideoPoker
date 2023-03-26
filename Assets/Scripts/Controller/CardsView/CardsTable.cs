@@ -17,8 +17,7 @@ namespace Controller
 
         private List<CardData> InitialCards = new List<CardData>();
         private List<CardData> SubstiuteCards = new List<CardData>();
-
-        private bool IsDeal = true;
+        
         private const int DelayConst = 200;
         private const int CardAnimationLength = 500;
 
@@ -29,10 +28,10 @@ namespace Controller
         // reset generated cards lists 
         // generate new card
         // assign card sprite to a table card and animate them 
-        
+
         public void DealCards()
         {
-            IsDeal = true;
+        
             ResetCardsDeck();
             InitialCards.Clear();
             SubstiuteCards.Clear();
@@ -40,7 +39,9 @@ namespace Controller
             int skipIndex = 0;
             foreach (var card in Cards)
             {
-                AssignAndAnimateCards(card, skipIndex++);
+                AssignNewCardSprite(card);
+                FlipCardBack(card);
+                FlipCardOnDealAnimation(card, skipIndex++);
             }
         }
 
@@ -49,7 +50,6 @@ namespace Controller
         // play draw animation and idle animation
         public void SubstituteCards()
         {
-            IsDeal = false;
             int skipIndex = 0;
             foreach (var card in Cards)
             {
@@ -61,11 +61,14 @@ namespace Controller
                 }
 
                 SubstituteCardsData(card);
-                AssignAndAnimateCards(card, skipIndex++);
+                AssignNewCardSprite(card);
+                FlipCardBack(card);
+                FlipCardOnDrawAnimation(card, skipIndex++);
             }
 
             CalculateTimeAfterDraw(skipIndex);
         }
+        
 
         // generate deal cards and same amount of sabstitute cards
         private void GenerateDealCards()
@@ -94,18 +97,25 @@ namespace Controller
         }
 
         // animate cards sequentially 
-        private void AssignAndAnimateCards(CardView card, int index)
+        private void AssignNewCardSprite(CardView card)
+        {
+            card.SetNewSuit(InitialCards[card.GetIndex()].GetCardSuit());
+        }
+
+        private void FlipCardBack(CardView card)
+        {
+            card.FlipBack();
+        }
+
+        private void FlipCardOnDealAnimation(CardView card, int index)
         {
             int delay = DelayConst * index + 10; // 10 for avoid over lap 
-            card.SetNewSuit(InitialCards[card.GetIndex()].GetCardSuit());
-            card.FlipBack();
-
-            if (IsDeal)
-            {
-                card.FlipCardWithDelay(delay);
-                return;
-            }
-
+            card.FlipCardWithDelay(delay);
+        }
+        
+        private void FlipCardOnDrawAnimation(CardView card, int index)
+        {
+            int delay = DelayConst * index + 10; // 10 for avoid over lap 
             card.FlipCardWithDelayDraw(delay);
         }
 

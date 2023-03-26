@@ -9,7 +9,7 @@ namespace Controller.UIView
     {
         [SerializeField] private Button DealButton;
         [SerializeField] private TextMeshProUGUI DealButtonText;
-   
+
         [SerializeField] private Button BetAddMoney;
         [SerializeField] private Button BetsOne;
         [SerializeField] private Button BetsTow;
@@ -23,14 +23,10 @@ namespace Controller.UIView
         {
             PopUpCanvase.SetActive(true);
         }
+
         public void ChangeDealText()
         {
             DealButtonText.text = DealButtonText.text.ToLower() == "deal" ? "Draw" : "Deal";
-        }
-
-        public bool IsDealRound()
-        {
-            return String.Equals(DealButtonText.text, "Deal", StringComparison.CurrentCultureIgnoreCase);
         }
 
         public void OnBetAddMoney(Action action)
@@ -60,26 +56,22 @@ namespace Controller.UIView
         {
             BetsFive.onClick.AddListener(() => action());
             BetsFive.onClick.AddListener(() => DisableAllIndicatorsExcept(2));
-
         }
 
         public void OnBetsTen(Action action)
         {
             BetsTen.onClick.AddListener(() => action());
             BetsTen.onClick.AddListener(() => DisableAllIndicatorsExcept(3));
-
         }
-        
+
         public void OnBetsFifteen(Action action)
         {
             BetsFifteen.onClick.AddListener(() => action());
             BetsFifteen.onClick.AddListener(() => DisableAllIndicatorsExcept(4));
-
         }
 
         public void EnableButtons(bool enable)
         {
-        
             BetsFive.interactable = enable;
             BetsOne.interactable = enable;
             BetsTen.interactable = enable;

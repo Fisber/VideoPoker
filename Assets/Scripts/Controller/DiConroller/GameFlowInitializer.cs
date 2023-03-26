@@ -21,6 +21,8 @@ namespace Controller
         [Inject] private HudMoneyView HudMoneyView;
         [Inject] private BetButtonsView BetButtonsView;
         [Inject] private FinalCombination FinalCombination;
+
+        private bool IsDealRound = true;
         
         public void Start()
         {
@@ -84,8 +86,9 @@ namespace Controller
                 return;
             }
             
-            if (BetButtonsView.IsDealRound())
+            if (IsDealRound)
             {
+                IsDealRound = false;
                 UserModel.DecreaseUserMoney();
                 HudMoneyView.SetTotalMoney(UserModel.GetMoney());
                 HudMoneyView.ResetCurrentWin();
@@ -96,6 +99,7 @@ namespace Controller
             }
             else
             {
+                IsDealRound = true;
                 CardsTable.SubstituteCards();
                 BetButtonsView.ChangeDealText();
             }

@@ -10,9 +10,9 @@ namespace Models
     /// </summary>
     public class FinalCombination
     {
-        // there several combination check Stratge 
+        // there several combination check Strategy
         // which we have to check, and because result is CombinationEnum 
-        // the combination with higher priority will over write combination with lower once
+        // the combination with higher priority will overwrite combination with lower once
         private List<ICheckCombination> CombinationsStratgies = new List<ICheckCombination>
         {
             new HighCardCombination(),
