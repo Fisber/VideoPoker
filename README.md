@@ -3,6 +3,7 @@
 ### Video for Helping to navigate in the project [Gameplay video](https://drive.google.com/file/d/1Vw4QQLv68wiGdUM1iAcCv4T-bSj_fL85/view?usp=share_link)
 
 ## Project view  
+- Scene: pleas opne ***Main*** Scene in case project opened on default Scene.
 - Scene: we can split it into 3 parts Buttons and Hud, Paytable, and CardsTable.  
 ## Project Script Hierarchy 
 - We can split the project hierarchy into Data, Controllers/Views,s and Models.
