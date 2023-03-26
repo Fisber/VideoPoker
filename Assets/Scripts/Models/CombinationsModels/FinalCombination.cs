@@ -15,22 +15,22 @@ namespace Models
         // the combination with higher priority will overwrite combination with lower once
         private List<ICheckCombination> CombinationsStratgies = new List<ICheckCombination>
         {
-            new HighCardCombination(),
+            new JacksOrBetterCombination(),
             new PairsCombination(),
             new StraightAndFlushCombination(),
             new FullHouseCombination(),
         };
 
-        public CombinationEnum GetFinalCombination(List<CardData> Cards)
+        public WinCombinations GetFinalCombination(List<CardData> Cards)
         {
             List<Card> cards = Cards.Select(card => card.GetCard()).ToList();
 
             return GetFinalCombination(cards);
         }
         
-        public CombinationEnum GetFinalCombination(List<Card> Cards)
+        public WinCombinations GetFinalCombination(List<Card> Cards)
         {
-            CombinationEnum combination = CombinationEnum.None;
+            WinCombinations combination = WinCombinations.None;
 
             foreach (var strategy in CombinationsStratgies)
             {

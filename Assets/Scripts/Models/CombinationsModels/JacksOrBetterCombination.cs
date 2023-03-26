@@ -9,9 +9,9 @@ namespace Models
     /// Highcard or Jacks or better
     /// logic : if we have 2 or more card of J Q K the it is jack or beater 
     /// </summary>
-    public class HighCardCombination : ICheckCombination
+    public class JacksOrBetterCombination : ICheckCombination
     {
-        public CombinationEnum CheckCombination(List<Card> cards)
+        public WinCombinations CheckCombination(List<Card> cards)
         {
             int highCards = 0;
 
@@ -23,7 +23,7 @@ namespace Models
                 }
             }
 
-            return highCards >= 2 ? CombinationEnum.JacksOrBetter : CombinationEnum.None;
+            return highCards >= 2 ? WinCombinations.JacksOrBetter : WinCombinations.None;
         }
     }
 }

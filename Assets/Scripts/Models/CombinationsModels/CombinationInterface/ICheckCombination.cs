@@ -6,6 +6,6 @@ namespace Models
 {
     public interface ICheckCombination
     {
-        public CombinationEnum CheckCombination(List<Card> cards);
+        public WinCombinations CheckCombination(List<Card> cards);
     }
 }

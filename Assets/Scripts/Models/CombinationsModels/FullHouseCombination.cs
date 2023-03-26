@@ -13,7 +13,7 @@ namespace Models
     {
         private Dictionary<Types, int> Types = new Dictionary<Types, int>();
 
-        public CombinationEnum CheckCombination(List<Card> cards)
+        public WinCombinations CheckCombination(List<Card> cards)
         {
             Types.Clear();
             
@@ -31,10 +31,10 @@ namespace Models
 
             if (Types.Count == 2)
             {
-                return CombinationEnum.FullHouse;
+                return WinCombinations.FullHouse;
             }
 
-            return CombinationEnum.None;
+            return WinCombinations.None;
         }
     }
 }

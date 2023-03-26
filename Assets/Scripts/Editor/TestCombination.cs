@@ -3,13 +3,13 @@ using Bets;
 using Cards;
 using Models;
 using NUnit.Framework;
-using System.Collections.Generic;
 using Types = Cards.Types;
+using System.Collections.Generic;
 
 public class TestCombination
 {
     /// <summary>
-    /// test  combination 
+    /// test  combination
     /// </summary>
     /// 
     Card Card1 = new Card();
@@ -18,7 +18,7 @@ public class TestCombination
     Card Card4 = new Card();
     Card Card5 = new Card();
 
-    private void CheckCombination(List<Card> cards, CombinationEnum target)
+    private void CheckCombination(List<Card> cards, WinCombinations target)
     {
         var finalCombination = new FinalCombination();
         var combination = finalCombination.GetFinalCombination(cards);
@@ -49,7 +49,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
     
-        CheckCombination(Combination, CombinationEnum.JacksOrBetter);
+        CheckCombination(Combination, WinCombinations.JacksOrBetter);
     
     }
 
@@ -77,7 +77,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.TwoPair);
+        CheckCombination(Combination, WinCombinations.TwoPair);
     }
     
     [Test]
@@ -104,7 +104,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.ThreeOfAKind);
+        CheckCombination(Combination, WinCombinations.ThreeOfAKind);
     }
     
     [Test]
@@ -131,7 +131,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.FourOfAKind);
+        CheckCombination(Combination, WinCombinations.FourOfAKind);
     }
     
     [Test]
@@ -158,7 +158,61 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.Straight);
+        CheckCombination(Combination, WinCombinations.Straight);
+    }
+    
+    [Test]
+    public void TestDescendingStraightCombination()
+    {
+        
+        Card1.SetSuits(Suits.Clubs);
+        Card1.SetCardType(Types.Five);
+
+        Card2.SetSuits(Suits.Diamond);
+        Card2.SetCardType(Types.Four);
+
+        Card3.SetSuits(Suits.Hearts);
+        Card3.SetCardType(Types.Three);
+
+        Card4.SetSuits(Suits.Hearts);
+        Card4.SetCardType(Types.Tow);
+
+        Card5.SetSuits(Suits.Spades);
+        Card5.SetCardType(Types.Ace);
+
+        List<Card> Combination = new List<Card>
+        {
+            Card1, Card2, Card3, Card4, Card5,
+        };
+        
+        CheckCombination(Combination, WinCombinations.Straight);
+    }
+    
+    [Test]
+    public void TestIncorrectStraightCombination()
+    {
+        
+        Card1.SetSuits(Suits.Clubs);
+        Card1.SetCardType(Types.Ace);
+
+        Card2.SetSuits(Suits.Diamond);
+        Card2.SetCardType(Types.Four);
+
+        Card3.SetSuits(Suits.Hearts);
+        Card3.SetCardType(Types.Three);
+
+        Card4.SetSuits(Suits.Hearts);
+        Card4.SetCardType(Types.Tow);
+
+        Card5.SetSuits(Suits.Spades);
+        Card5.SetCardType(Types.Five);
+
+        List<Card> Combination = new List<Card>
+        {
+            Card1, Card2, Card3, Card4, Card5,
+        };
+        
+        CheckCombination(Combination, WinCombinations.None);
     }
     
     [Test]
@@ -169,13 +223,13 @@ public class TestCombination
         Card1.SetCardType(Types.Ace);
 
         Card2.SetSuits(Suits.Diamond);
-        Card2.SetCardType(Types.Tow);
+        Card2.SetCardType(Types.Four);
 
         Card3.SetSuits(Suits.Hearts);
         Card3.SetCardType(Types.Three);
 
         Card4.SetSuits(Suits.Hearts);
-        Card4.SetCardType(Types.Four);
+        Card4.SetCardType(Types.Tow);
 
         Card5.SetSuits(Suits.Spades);
         Card5.SetCardType(Types.Five);
@@ -185,7 +239,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.Straight);
+        CheckCombination(Combination, WinCombinations.None);
     }
     
     [Test]
@@ -212,7 +266,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.StraightFlush);
+        CheckCombination(Combination, WinCombinations.StraightFlush);
     }
     
     [Test]
@@ -239,7 +293,7 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.Flush);
+        CheckCombination(Combination, WinCombinations.Flush);
     }
     
     [Test]
@@ -266,6 +320,6 @@ public class TestCombination
             Card1, Card2, Card3, Card4, Card5,
         };
         
-        CheckCombination(Combination, CombinationEnum.FullHouse);
+        CheckCombination(Combination, WinCombinations.FullHouse);
     }
 }

@@ -4,7 +4,7 @@ namespace Bets
     /// this enum hold all the combination in the game
     /// form less priority to the higher one
     /// </summary>
-    public enum CombinationEnum
+    public enum WinCombinations
     {
         None,
         JacksOrBetter,

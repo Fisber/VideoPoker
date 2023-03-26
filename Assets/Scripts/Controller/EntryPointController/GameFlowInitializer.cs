@@ -51,7 +51,7 @@ namespace Controller
         {
             var combination = FinalCombination.GetFinalCombination(cardsData);
 
-            if (combination == CombinationEnum.None)
+            if (combination == WinCombinations.None)
             {
                 return;
             }

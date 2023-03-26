@@ -29,7 +29,7 @@ namespace Models
         private bool IsFlush;
         private bool IsStraight;
 
-        public CombinationEnum CheckCombination(List<Card> cards)
+        public WinCombinations CheckCombination(List<Card> cards)
         {
             Types.Clear();
             Suits.Clear();
@@ -49,24 +49,24 @@ namespace Models
             }
 
 
-            CombinationEnum combination = CombinationEnum.None;
+            WinCombinations combination = WinCombinations.None;
 
-             IsStraight = CheckStraight();
-             IsFlush = CheckFlush();
+            IsStraight = CheckStraight();
+            IsFlush = CheckFlush();
 
             if (IsStraight)
             {
-                combination = CombinationEnum.Straight;
+                combination = WinCombinations.Straight;
             }
 
             if (IsStraight && IsFlush)
             {
-                combination = CombinationEnum.StraightFlush;
+                combination = WinCombinations.StraightFlush;
             }
 
             if (IsStraight == false && IsFlush)
             {
-                combination = CombinationEnum.Flush;
+                combination = WinCombinations.Flush;
             }
 
             return combination;
@@ -85,24 +85,48 @@ namespace Models
                 return false;
             }
 
-            // check BroadwayCombination 
+            // check BroadwayCombination || royall Straight
             if (Types.Except(BroadwayCombination).Any() == false)
             {
                 return true;
             }
 
-            //1-2-3-4-5 - > 5-1 , 4-2 , 4-1 == 2+1 == element in the middle <3>
-            bool condition = Math.Abs(Types[4] - Types[0]) == 4;
-            condition = condition && Math.Abs(Types[3] - Types[1]) == 2;
-            condition = condition && Math.Abs((int) Types[3] - 1)
-                == Math.Abs((int) Types[1] + 1);
+            bool isStraightAscending = CheckStraightAscending();
+            bool isStraightDescending = CheckStraightDescending();
 
-            if (condition)
+            if (isStraightAscending || isStraightDescending)
             {
                 return true;
             }
 
             return false;
+        }
+
+        private bool CheckStraightAscending()
+        {
+            for (int i = 0; i < Types.Count - 1; i++)
+            {
+                if (Types[i] + 1 != Types[i + 1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool CheckStraightDescending()
+        {
+            for (int i = Types.Count - 1; i > 0; i--)
+            {
+
+                if (Types[i] + 1  != Types[i - 1])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

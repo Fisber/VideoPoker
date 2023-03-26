@@ -16,7 +16,7 @@ namespace Models
     {
         private Dictionary<Types, int> CardsPairs = new Dictionary<Types, int>();
 
-        public CombinationEnum CheckCombination(List<Card> cards)
+        public WinCombinations CheckCombination(List<Card> cards)
         {
             CardsPairs.Clear();
             
@@ -35,7 +35,7 @@ namespace Models
             int max = CardsPairs.Max(s => s.Value);
             int towPairs = CardsPairs.Count(s => s.Value > 1);
 
-            CombinationEnum combination = CombinationEnum.None;
+            WinCombinations combination = WinCombinations.None;
             
             //one pair
             // if (max == 2)
@@ -45,17 +45,17 @@ namespace Models
 
             if (towPairs == 2)
             {
-                combination = CombinationEnum.TwoPair;
+                combination = WinCombinations.TwoPair;
             }
 
             if (max == 3)
             {
-                combination = CombinationEnum.ThreeOfAKind;
+                combination = WinCombinations.ThreeOfAKind;
             }
 
             if (max == 4)
             {
-                combination = CombinationEnum.FourOfAKind;
+                combination = WinCombinations.FourOfAKind;
             }
 
             return combination;

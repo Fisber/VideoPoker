@@ -4,15 +4,15 @@ using UnityEngine;
 namespace Combination
 {
     /// <summary>
-    /// this screptable object used as holder for all combination plus
+    /// this ScriptableObject  used as holder for all combination plus
     /// it used for ui representation also 
     /// </summary>
     [CreateAssetMenu(menuName = "SO/CombinationData",fileName = "CombinationData")]
     public class CombinationData : ScriptableObject
     {
-        [SerializeField] private CombinationEnum[] CombinationEnums;
+        [SerializeField] private WinCombinations[] CombinationEnums;
 
-        public CombinationEnum[] GetCombination()
+        public WinCombinations[] GetCombination()
         {
             return CombinationEnums;
         }
