@@ -1,23 +1,24 @@
 # MobilityWareTest
 ## Project video poker 
+### Video for Helping to navigate in the project [Gameplay video](https://drive.google.com/file/d/1Vw4QQLv68wiGdUM1iAcCv4T-bSj_fL85/view?usp=share_link)
 
 ## Project view  
-- Scene: we can split it into 3 part Buttons and Hud, Paytable, and CardsTable.   
+- Scene: we can split it into 3 parts Buttons and Hud, Paytable, and CardsTable.  
 ## Project Script Hierarchy 
-- we can split project hierarchy into Data and controllers/View and Models.
-- project use DIContainer VContainer for maanging dependance and logic bettwen defferent parts. 
+- We can split the project hierarchy into Data, Controllers/Views,s and Models.
+- Project is useing DIContainer VContainer for managing dependencies and logic between different parts.
 ## EntryPoint
-### these scripts will help you navigate inside project 
-- GameLifeScope : is a Container initializer and dependancy binder.
+### Explanation of how to navigate inside the project 
+- GameLifeScope : is a Container initializer and dependency binder.
 - UIInitializer : initialize all ui in the project. 
-- GameFlowInitializer : is responseble about managing the game flow and game loop. 
+- GameFlowInitializer : is responsible about managing the game flow and game loop. 
 ### GameLifeScope 
-- bind all project partst and then Inject needed part insid **GameFlowInitializer** and **UIInitializer**.
-- all controllers  *BetButtonsView, HudMoneyView, BetsTable, CardsTable* do not interact together directly they interact only in 
+- Bind all project parts and then Inject needed part insid **GameFlowInitializer** or **UIInitializer**.
+- All controllers  *BetButtonsView, HudMoneyView, BetsTable, CardsTable* do not interact directly with each other they interact only in 
 UIInitializer and GameFlowInitializer.
-- this help seperate laogic from view.
-- models also injected only in UIInitializer and GameFlowInitializer.
-### Video for Helping to navigate in the project [Gameplay video](https://drive.google.com/file/d/1Vw4QQLv68wiGdUM1iAcCv4T-bSj_fL85/view?usp=share_link)
+- This help seperate laogic from view.
+- Models also injected only in UIInitializer and GameFlowInitializer.
+
 
 
 
