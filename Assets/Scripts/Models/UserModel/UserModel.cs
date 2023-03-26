@@ -5,7 +5,7 @@ namespace Models.UserModel
     /// </summary>
     public class UserModel
     {
-        private long CurrentMoneyAmount = 0;
+        private long CurrentMoneyAmount = 100;
         private long CurrentWinAmount;
         private int CurrentCredits = 1; // 1 2 5 10 15
 
