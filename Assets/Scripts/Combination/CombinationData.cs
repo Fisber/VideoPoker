@@ -17,9 +17,5 @@ namespace Combination
             return CombinationEnums;
         }
 
-        public CombinationEnum GetAtIndex(int index)
-        {
-            return CombinationEnums[index];
-        }
     }
 }

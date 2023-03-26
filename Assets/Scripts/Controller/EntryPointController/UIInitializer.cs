@@ -8,7 +8,7 @@ using Controller.UIView;
 namespace Controller
 {
     // this entry point responsible about binding UI with logic <click buttons,update money .. >
-    public class BetButtonUiInitializer : IStartable
+    public class UIInitializer : IStartable
     {
         [Inject] private BetButtonsView BetButtonsView;
 

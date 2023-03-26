@@ -29,7 +29,7 @@ namespace Controller
         {
             builder.UseEntryPoints(Lifetime.Singleton, entryPoints =>
             { 
-                entryPoints.Add<BetButtonUiInitializer>();
+                entryPoints.Add<UIInitializer>();
                 entryPoints.Add<GameFlowInitializer>();
             });
                 
