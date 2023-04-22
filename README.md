@@ -1,4 +1,4 @@
-# MobilityWareTest
+# DI
 ## Project video poker 
 ### Video for Helping to navigate in the project [Gameplay video](https://drive.google.com/file/d/1Vw4QQLv68wiGdUM1iAcCv4T-bSj_fL85/view?usp=share_link)
 
