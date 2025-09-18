@@ -1,0 +1,44 @@
+name: Unity Windows Build
+
+on:
+  workflow_dispatch:   # Only runs when manually triggered
+
+jobs:
+  build-windows:
+    name: Build (Windows 64-bit)
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Cache Unity Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-${{ hashFiles('**/ProjectSettings/ProjectVersion.txt', '**/Packages/manifest.json') }}
+          restore-keys: |
+            Library-${{ runner.os }}-
+
+      - name: Build (StandaloneWindows64)
+        uses: game-ci/unity-builder@v4
+        with:
+          projectPath: .
+          targetPlatform: StandaloneWindows64
+          buildName: GameCI-Windows
+          buildPath: build/windows
+          versioning: Semantic
+          allowDirtyBuild: true
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: WindowsBuild
+          path: build/windows
